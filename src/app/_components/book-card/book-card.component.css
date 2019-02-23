@@ -1,0 +1,110 @@
+.book-img {
+    height: 0;
+    padding-bottom: 150%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    top: 0;
+    border-radius: 8px;
+    transition: .4s all ease;
+    box-shadow: 2px 10px 21px 1px rgba(0,0,0,0.2);
+    position: relative;
+}
+.book{
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+.book:hover .book-img {
+    transform: scale(1.05);
+    top: -10px;
+    box-shadow: 1px 13px 22px 1px rgba(0,0,0,0.2);
+}
+.book:hover .book-link {
+    animation: move 1s ease-in-out  infinite;
+} 
+.book-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #1f2d55
+}
+
+.book-details {
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    height: calc(100% - 40px);
+    width: calc(50% + 15px);
+    top: 20px;
+    padding: 20px;
+    border-radius: 0px 8px 8px 0px;
+}
+.book-authors {
+    line-height: 15px;
+    font-size: 13px;
+    color: #7a88b4;
+}
+.book-publisher {
+    font-size: 12px;
+    align-self: flex-end;
+    color: #b4bed6;
+    padding-right: 20px;
+}
+.rating {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 8px 0px 8px 0px;
+    color: #fff;
+    background-color: #1f2d55;
+    font-size: 12px;
+    box-shadow: -4px -6px 13px 0px rgba(0, 0, 0, 0.2);
+    padding: 8px 12px;
+}
+.book-details {
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 40px);
+    width: calc(50% + 15px);
+    top: 20px;
+    padding: 20px;
+    border-radius: 0px 8px 8px 0px;
+    flex-wrap: wrap;
+}
+.book-link {
+    box-shadow: 0px 4px 13px 0px rgba(239,69,164,0.6);
+    position: absolute;
+    right: 10px;
+    background-color: #ef45a4;
+    line-height: 24px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 4px;
+    bottom: 10px;
+}
+
+.book-link-icon path{
+    fill: #fff
+}
+
+@keyframes move{
+    0%, 100%{
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      -o-transform: translateX(0);
+      transform: translateX(0);
+    }
+  
+    50%{
+      -webkit-transform: translateX(-10px);
+      -ms-transform: translateX(-10px);
+      -o-transform: translateX(-10px);
+      transform: translateX(-10px);
+    }
+  }
