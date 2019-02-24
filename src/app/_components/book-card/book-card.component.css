@@ -19,10 +19,16 @@
 }
 .book:hover .book-img {
     transform: scale(1.05);
+    -o-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
     top: -10px;
     box-shadow: 1px 13px 22px 1px rgba(0,0,0,0.2);
 }
 .book:hover .book-link {
+    -webkit-animation: move 1s ease-in-out  infinite;
+    -o-animation: move 1s ease-in-out  infinite;
     animation: move 1s ease-in-out  infinite;
 } 
 .book-title {
@@ -31,16 +37,6 @@
     color: #1f2d55
 }
 
-.book-details {
-    position: absolute;
-    right: 0;
-    background-color: #fff;
-    height: calc(100% - 40px);
-    width: calc(50% + 15px);
-    top: 20px;
-    padding: 20px;
-    border-radius: 0px 8px 8px 0px;
-}
 .book-authors {
     line-height: 15px;
     font-size: 13px;
@@ -68,7 +64,7 @@
     right: 0;
     background-color: #fff;
     align-items: flex-start;
-    display: flex;
+    display: none;
     flex-direction: row;
     height: calc(100% - 40px);
     width: calc(50% + 15px);
@@ -107,4 +103,14 @@
       -o-transform: translateX(-10px);
       transform: translateX(-10px);
     }
+  }
+
+  @media screen and (min-width:767px){
+      .book-details{
+        -webkit-display: flex;
+        -moz-display: flex;
+        -ms-display: flex;
+        -o-display: flex;
+        display: flex;
+      }
   }

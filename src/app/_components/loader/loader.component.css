@@ -3,7 +3,7 @@ span {
     width: 20px;
     height: 20px;
     border-radius: 100%;
-    background-color: #fff;
+    background-color: #1f2d55;
     margin: 35px 5px;
     opacity: 0.4;
 }
@@ -12,8 +12,13 @@ span {
 }
 span:nth-child(1) {
     animation: bounce 1.3s ease-in-out infinite;
+    -webkit-animation: bounce 1.3s ease-in-out infinite;
+    -o-animation: bounce 1.3s ease-in-out infinite;
+    animation: bounce 1.3s ease-in-out infinite;
 }
  span:nth-child(2) {
+    -webkit-animation: bounce 1.3s ease-in-out 0.44s infinite;
+    -o-animation: bounce 1.3s ease-in-out 0.44s infinite;
     animation: bounce 1.3s ease-in-out 0.44s infinite;
 }
 span:nth-child(3) {

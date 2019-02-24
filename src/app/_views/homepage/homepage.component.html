@@ -8,10 +8,10 @@
                 <h1 class="app-title">Book finder</h1>
                 <h3 class="app-subtitle">search and discover</h3>
                 <div class="row">
-                  <div class="col-md-6 offset-md-3">
+                  <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
                     <form [formGroup]="searchForm" (ngSubmit)="search()">
                       <div class="form-group search-input-group">
-                        <input required formControlName="query" type="text" class="form-control" placeholder="What are you looking for?">
+                        <input required formControlName="query" type="text" [class.required]="emptyQuery" class="form-control" placeholder="What are you looking for?">
                         <button class="btn btn-search">
                           <svg version="1.1" class="search-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                           viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve">
@@ -21,10 +21,7 @@
                          s-17-7.626-17-17S14.61,6,23.984,6z"/>
                        </svg>
                       </button>
-                      </div>
-                      <div class="text-center">
-                          <loader  [visibility]="loaders.books.visibility"></loader>
-                      </div>                      
+                      </div>                   
                     </form>
                   </div>
                 </div>
@@ -36,18 +33,28 @@
         <div class="col-md-12  row-eq-height" [@listAnimation]="books.length">
             <div class="container  align-items-end">
               <div class="row">
-                  <div class="col-md-4" *ngFor="let book of books; let i = index">
+                  <div class="col-md-6 col-lg-4 col-sm-6 col-6" *ngFor="let book of books; let i = index">
                       <book-card [book]="book" ></book-card>   
                   </div>
               </div>
             </div>
         </div>
         <div class="col-md-12">
-            <div class="text-center" *ngIf="totalBooks==0">
-                <p class="nores-title">No matching books</p>
-                <p class="nores-subtitle">There weren't any books matching your search, try with another query</p>
+            <div class="text-center" *ngIf="error">
+                <p class="nores-title">{{errorMessage.title}}</p>
+                <p class="nores-subtitle">{{errorMessage.subtitle}}</p>
               </div>
         </div>
+        <div class="col-md-12">
+          <div class="text-center">
+            <loader  [visibility]="loaders.books.visibility"></loader>
+          </div>   
+        </div>
+        <div class="col-md-12" *ngIf="totalBooks>0 && books.length<totalBooks">
+          <div class="text-center" >
+             <button class="btn btn-pink " (click)="loadOtherBooks($event)">Load more...</button>
+          </div>
+      </div>
     </section>
     
   </div>

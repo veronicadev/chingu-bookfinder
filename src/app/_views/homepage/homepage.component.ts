@@ -29,6 +29,14 @@ import { HostBinding } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
   searchForm: FormGroup;
+  error: boolean = false;
+  emptyQuery: boolean = false;
+  query: String
+  errorMessage = {
+    title:'',
+    subtitle:''
+  };
+  errors: any;
   @HostBinding('@listAnimation')
   loaders: any = {
     books: {
@@ -42,6 +50,16 @@ export class HomepageComponent implements OnInit {
     this.searchForm = new FormGroup({
       query: new FormControl(null, Validators.required),
     });
+    this.errors = {
+      noresults:{
+        title:'No matching books' ,
+        subtitle: "There weren't any books matching your search, try with another query",
+      },
+      serverError:{
+        title:'Server Error' ,
+        subtitle: "An error occurred",
+      }
+    };
     this.books = []
   }
 
@@ -49,12 +67,39 @@ export class HomepageComponent implements OnInit {
     
   }
   get f() { return this.searchForm.controls; }
-
+  loadOtherBooks(event){
+    event.preventDefault()
+    this.error = false
+    this.searched = true
+    this.loaders.books.visibility = true;
+    let pagination = this.books.length + 1
+    this.booksService
+    .search(this.query, pagination)
+    .subscribe((data: Config) => {
+      //console.log(data)
+      
+      if(data.items.length>0){
+        this.books = this.books.concat(this.booksService.mapBookCard(data.items));
+      }
+      //console.log(this.books)
+      this.loaders.books.visibility = false;
+    },
+    (error: Config) =>{
+      console.log(error)
+      this.error = true
+      this.errorMessage = this.errors.serverError
+      this.loaders.books.visibility = false;
+    });
+  }
   search(){
+    this.error = false
     let query = this.searchForm.value.query;
+    this.query = query
     if(!query){
+      this.emptyQuery = true
       return
     }
+    this.emptyQuery = false
     //console.log(query)
     this.searched = true
     this.loaders.books.visibility = true;
@@ -64,12 +109,21 @@ export class HomepageComponent implements OnInit {
       //console.log(data)
       
       this.totalBooks = data.totalItems
+
       this.books = []
       if(this.totalBooks>0){
-        //console.log(data.items)
         this.books = this.booksService.mapBookCard(data.items);
+      }else{
+        this.error = true
+        this.errorMessage = this.errors.noresults
       }
       //console.log(this.books)
+      this.loaders.books.visibility = false;
+    },
+    (error: Config) =>{
+      console.log(error)
+      this.error = true
+      this.errorMessage = this.errors.serverError
       this.loaders.books.visibility = false;
     });
   }
