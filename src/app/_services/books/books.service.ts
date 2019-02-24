@@ -12,10 +12,10 @@ export class BooksService {
   API_URL = environment.API_URL;
   constructor(private http: HttpClient) { }
   getBook (id){
-    return this.http.get(`${this.API_URL}/volumes/$${id}&key=${this.API_KEY}`)
+    return this.http.get(`${this.API_URL}/volumes/${id}`)
   }
   search (descr, index=0){
-    let fields = "kind,totalItems,items(id,volumeInfo/title,volumeInfo/authors,volumeInfo/imageLinks/thumbnail,volumeInfo/publisher,volumeInfo/averageRating)"
+    let fields = "kind,totalItems,items(id,volumeInfo,volumeInfo/previewLink,volumeInfo/title,volumeInfo/authors,volumeInfo/imageLinks/thumbnail,volumeInfo/publisher,volumeInfo/averageRating)"
     return this.http.get(`${this.API_URL}/volumes/?q=${descr}&fields=${fields}&maxResults=20&startIndex=${index}&key=${this.API_KEY}`)
   }
   mapBookCard(books){
@@ -36,6 +36,7 @@ export class BooksService {
         imageUrl: imageUrl,
         title: title,
         authors: authors,
+        infoLink: check_default(element.volumeInfo.infoLink, ''),
         publisher: check_default(element.volumeInfo.publisher, ''),
         averageRating: check_default(element.volumeInfo.averageRating, 0)
       }
@@ -47,9 +48,8 @@ export class BooksService {
   }
   setBookCover(el){
     if(check_var(el)){
-      return check_default(el.thumbnail, 'assets/img/cover.png')
+      return check_default(el.thumbnail, 'assets/img/cover.png').replace('zoom=1', "zoom=2")
     }
       return 'assets/img/cover.png'
-    
   } 
 }

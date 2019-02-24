@@ -13,7 +13,6 @@ import { BookCardComponent } from './_components/book-card/book-card.component';
 
 /* VIEWS*/
 import { HomepageComponent } from './_views/homepage/homepage.component';
-import { BookComponent } from './_views/book/book.component';
 import { LoaderComponent } from './_components/loader/loader.component';
 
 
@@ -22,7 +21,6 @@ import { LoaderComponent } from './_components/loader/loader.component';
     AppComponent,
     BookCardComponent,
     HomepageComponent,
-    BookComponent,
     LoaderComponent
   ],
   imports: [

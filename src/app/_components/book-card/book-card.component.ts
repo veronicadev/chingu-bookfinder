@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookCard } from '../../_interfaces/book-card';
 import { Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'book-card',
@@ -9,13 +10,10 @@ import { Input } from '@angular/core';
 })
 export class BookCardComponent implements OnInit {
   @Input() book: BookCard
-  link: any
+
   constructor() { }
 
   ngOnInit() {
-    this.link = {
-      id: this.book.id
-    }
   }
 
 }
